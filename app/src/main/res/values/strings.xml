@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">UnboundedService</string>
+    <string name="app_name">Lecture Musique</string>
     <string name="stop">Stop</string>
     <string name="start">Start</string>
+    <string name="son">Son</string>
+    <string name="progression">Progression</string>
 </resources>

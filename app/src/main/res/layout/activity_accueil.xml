@@ -14,18 +14,65 @@
         android:text="@string/start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/bStart"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="@string/son"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/sbSon"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="14dp"
+        android:id="@+id/tvSon" />
+
+    <SeekBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="108dp"
+        android:id="@+id/sbProg"
+        android:layout_below="@+id/sbSon"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/bStart" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="@string/progression"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvProg"
+        android:layout_alignBottom="@+id/sbProg"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="19dp" />
+
+    <SeekBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sbSon"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:text="@string/stop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/bStop"
         android:layout_below="@+id/bStart"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="54dp"
-        android:id="@+id/bStop" />
+        android:layout_alignLeft="@+id/bStart"
+        android:layout_alignStart="@+id/bStart" />
+
+    <Button
+        android:text="Pause"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bPause"
+        android:layout_below="@+id/bStop"
+        android:layout_alignLeft="@+id/bStop"
+        android:layout_alignStart="@+id/bStop"
+        android:layout_marginTop="13dp" />
 </RelativeLayout>

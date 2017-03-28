@@ -16,10 +16,6 @@
             </intent-filter>
         </activity>
 
-        <service
-            android:name=".UnboundedService"
-            android:enabled="true">
-        </service>
     </application>
 
 </manifest>
