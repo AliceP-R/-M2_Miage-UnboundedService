@@ -30,13 +30,12 @@ class monThread extends AsyncTask<Void, Integer, Void>
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
-        sbProg.setProgress(0);
-
     }
 
     @Override
     protected void onProgressUpdate(Integer... values) {
         super.onProgressUpdate(values);
+        sbProg.setProgress(values[0]);
     }
 
     @Override
@@ -51,8 +50,8 @@ class monThread extends AsyncTask<Void, Integer, Void>
 
     @Override
     protected void onCancelled() {
-        mp.stop();
-        mp = null;
         super.onCancelled();
+        sbProg.setProgress(0);
+        mp.stop();
     }
 }

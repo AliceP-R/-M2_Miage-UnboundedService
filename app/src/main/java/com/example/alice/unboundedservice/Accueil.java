@@ -40,14 +40,16 @@ public class Accueil extends AppCompatActivity {
 
         Button start = (Button) findViewById(R.id.bStart);
         final monThread[] mt = new monThread[1];
-                start.setOnClickListener(new View.OnClickListener() {
+        start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mp=MediaPlayer.create(getApplicationContext(), R.raw.swingdechocobo);
-                mp.setLooping(false);
-                sbProg.setMax(mp.getDuration());
-                mt[0] = new monThread(getApplicationContext(), sbProg, mp);
-                mt[0].execute();
+                if(mp == null && mt[0] == null) {
+                    mp = MediaPlayer.create(getApplicationContext(), R.raw.swingdechocobo);
+                    mp.setLooping(false);
+                    sbProg.setMax(mp.getDuration());
+                    mt[0] = new monThread(getApplicationContext(), sbProg, mp);
+                    mt[0].execute();
+                }
             }
         });
 
