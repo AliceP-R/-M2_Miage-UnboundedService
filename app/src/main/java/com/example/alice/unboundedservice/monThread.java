@@ -4,7 +4,6 @@ import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.widget.SeekBar;
-import android.widget.Toast;
 
 /**
  * Created by alice on 28/03/2017.
@@ -25,26 +24,35 @@ class monThread extends AsyncTask<Void, Integer, Void>
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        mp.start();
     }
 
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
+        sbProg.setProgress(0);
+
     }
 
     @Override
     protected void onProgressUpdate(Integer... values) {
         super.onProgressUpdate(values);
-        sbProg.setProgress(values[0]);
     }
 
     @Override
     protected Void doInBackground(Void... voids)
     {
-        while(mp.getCurrentPosition() != mp.getDuration()) {
+        while(mp.getCurrentPosition() != mp.getDuration() && !this.isCancelled()) {
 
             publishProgress(mp.getCurrentPosition());
         }
         return null;
+    }
+
+    @Override
+    protected void onCancelled() {
+        mp.stop();
+        mp = null;
+        super.onCancelled();
     }
 }

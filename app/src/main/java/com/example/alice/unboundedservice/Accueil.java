@@ -18,11 +18,9 @@ public class Accueil extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accueil);
 
-        mp=MediaPlayer.create(this, R.raw.swingdechocobo);
-        mp.setLooping(false);
+
 
         final SeekBar sbProg = (SeekBar) findViewById(R.id.sbProg);
-        sbProg.setMax(mp.getDuration());
         sbProg.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -41,12 +39,15 @@ public class Accueil extends AppCompatActivity {
         });
 
         Button start = (Button) findViewById(R.id.bStart);
-        start.setOnClickListener(new View.OnClickListener() {
+        final monThread[] mt = new monThread[1];
+                start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mp.start();
-                monThread mt = new monThread(getApplicationContext(), sbProg, mp);
-                mt.execute();
+                mp=MediaPlayer.create(getApplicationContext(), R.raw.swingdechocobo);
+                mp.setLooping(false);
+                sbProg.setMax(mp.getDuration());
+                mt[0] = new monThread(getApplicationContext(), sbProg, mp);
+                mt[0].execute();
             }
         });
 
@@ -54,7 +55,10 @@ public class Accueil extends AppCompatActivity {
         stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mp.stop();
+                if(mt[0] != null) {
+                    mt[0].cancel(true);
+                    mt[0] = null;
+                }
                 sbProg.setProgress(0);
             }
         });
@@ -64,13 +68,17 @@ public class Accueil extends AppCompatActivity {
         pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int tPause = mp.getCurrentPosition();
                 if(enPause[0])
                 {
+                    mp.seekTo(tPause);
                     mp.start();
+                    enPause[0] = false;
                 }
                 else
                 {
                     mp.pause();
+                    tPause = mp.getCurrentPosition();
                     enPause[0] = true;
 
                 }
@@ -102,9 +110,6 @@ public class Accueil extends AppCompatActivity {
 
             }
         });
-
-
-
     }
 
     @Override
