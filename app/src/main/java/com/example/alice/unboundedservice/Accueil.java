@@ -60,6 +60,7 @@ public class Accueil extends AppCompatActivity {
                 if(mt[0] != null) {
                     mt[0].cancel(true);
                     mt[0] = null;
+                    mp = null;
                 }
                 sbProg.setProgress(0);
             }
@@ -112,11 +113,5 @@ public class Accueil extends AppCompatActivity {
 
             }
         });
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mp.stop();
     }
 }
