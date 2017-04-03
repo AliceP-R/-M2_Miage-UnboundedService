@@ -53,5 +53,6 @@ class monThread extends AsyncTask<Void, Integer, Void>
         super.onCancelled();
         sbProg.setProgress(0);
         mp.stop();
+        mp = null;
     }
 }

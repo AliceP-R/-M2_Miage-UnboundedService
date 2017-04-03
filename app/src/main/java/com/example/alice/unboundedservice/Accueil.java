@@ -24,7 +24,8 @@ public class Accueil extends AppCompatActivity {
         sbProg.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                mp.seekTo(progress);
+                if(mp != null)
+                    mp.seekTo(progress);
             }
 
             @Override
@@ -38,7 +39,15 @@ public class Accueil extends AppCompatActivity {
             }
         });
 
-        Button start = (Button) findViewById(R.id.bStart);
+        final Button start = (Button) findViewById(R.id.bStart);
+        final Button stop = (Button) findViewById(R.id.bStop);
+        final Button pause = (Button) findViewById(R.id.bPause);
+
+        start.setEnabled(true);
+        stop.setEnabled(false);
+        pause.setEnabled(false);
+
+
         final monThread[] mt = new monThread[1];
         start.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,11 +58,14 @@ public class Accueil extends AppCompatActivity {
                     sbProg.setMax(mp.getDuration());
                     mt[0] = new monThread(getApplicationContext(), sbProg, mp);
                     mt[0].execute();
+                    start.setEnabled(false);
+                    pause.setEnabled(true);
+                    stop.setEnabled(true);
                 }
             }
         });
 
-        Button stop = (Button) findViewById(R.id.bStop);
+
         stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,10 +75,12 @@ public class Accueil extends AppCompatActivity {
                     mp = null;
                 }
                 sbProg.setProgress(0);
+                start.setEnabled(true);
+                pause.setEnabled(false);
+                stop.setEnabled(false);
             }
         });
 
-        Button pause = (Button) findViewById(R.id.bPause);
         final boolean[] enPause = {false};
         pause.setOnClickListener(new View.OnClickListener() {
             @Override
